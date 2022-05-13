@@ -16,16 +16,17 @@ namespace ControleDeContatos.Controllers
         public IActionResult Index()
         {
 
-            List <ContatoModel> contatos= _contatoRepositorio.BuscarTodos();
+            List<ContatoModel> contatos = _contatoRepositorio.BuscarTodos();
             return View(contatos);
         }
         public IActionResult Criar()
         {
             return View();
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int Id)
         {
-            return View();
+            ContatoModel contato = _contatoRepositorio.ListarPorId(Id);
+            return View(contato);
         }
         public IActionResult ApagarConfirmacao()
         {

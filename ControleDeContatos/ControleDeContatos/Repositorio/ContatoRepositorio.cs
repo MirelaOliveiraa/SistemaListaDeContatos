@@ -11,19 +11,23 @@ namespace ControleDeContatos.Repositorio
             _bancoContext = bancoContext;
         }
 
-
+        public ContatoModel ListarPorId(int id)
+        {
+            return _bancoContext.Contatos.FirstOrDefault(b => b.Id == id);
+        }
         public List<ContatoModel> BuscarTodos()
         {
-        
+
             return _bancoContext.Contatos.ToList();
         }
-        
+
         public ContatoModel Adiconar(ContatoModel contato)
         {
             _bancoContext.Contatos.Add(contato);
             _bancoContext.SaveChanges();
             return contato;
         }
+
 
     }
 }
