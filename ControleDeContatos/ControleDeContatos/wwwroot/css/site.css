@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.field-validation-error{
+    color: #e01d1d;
+}
+
+.close-alert{
+    width: 30px;
+    height: 31px;
+
+    right: -10px;
+    top: -15px;
+    position: absolute;
+    border-radius: 15px;
+}

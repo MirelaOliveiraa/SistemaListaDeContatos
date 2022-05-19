@@ -2,29 +2,34 @@
 @{
     ViewData["Title"] = "Criar Contato";
 }
+
+
 <div class="text-center">
     <h1 class="display-4">Cadastrar contato</h1>
 
 </div>
-<form asp-controller="Contato" asp-action="Criar" method="post" >
+<form asp-controller="Contato" asp-action="Criar" method="post">
 
-    <div class="form-group">
+    <div class="form-group mb-2">
         <label for="nome">Nome</label>
         <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do contato">
+        @Html.ValidationMessageFor(x => x.Nome)
     </div>
-    <br />
-    <div class="form-group">
+    <div class="form-group mb-2">
         <label for="email">Email</label>
         <input type="text" asp-for="Email" class="form-control" placeholder="Digite o email do contato">
+        @Html.ValidationMessageFor(x => x.Email)
     </div>
-    <br />
 
-    <div class="form-group">
+    <div class="form-group mb-2 ">
         <label for="celular">Celular</label>
-        <input type="text" asp-for="Celular" class="form-control" placeholder="Digite o celular do contato">
+        <input type="text" asp-for="Celular" class="form-control " id="phone" placeholder="Digite o celular do contato">
+        @Html.ValidationMessageFor(x => x.Celular)
     </div>
-    <br />
 
     <button type="submit" class="btn btn-primary ">Adicionar</button>
     <a class="btn-secondary btn" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>

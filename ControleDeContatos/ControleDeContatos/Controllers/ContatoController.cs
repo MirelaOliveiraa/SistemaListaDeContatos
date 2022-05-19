@@ -1,9 +1,11 @@
-﻿using ControleDeContatos.Models;
+﻿using ControleDeContatos.Filters;
+using ControleDeContatos.Models;
 using ControleDeContatos.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeContatos.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ContatoController : Controller
     {
         private readonly IContatoRepositorio _contatoRepositorio;
@@ -27,8 +29,23 @@ namespace ControleDeContatos.Controllers
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
-            _contatoRepositorio.Adicionar(contato);
-            return RedirectToAction("Index");
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Adicionar(contato);
+                    TempData["MensagemSucesso"] = "Contato cadastrado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View(contato);
+
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar seu contato, tente novamente, detalhe do erro:{error.Message}";
+                return RedirectToAction("Index");
+            }
         }
         public IActionResult Editar(int Id)
         {
@@ -44,17 +61,49 @@ namespace ControleDeContatos.Controllers
 
         public IActionResult Apagar(int Id)
         {
+            try
+            {
 
-            _contatoRepositorio.Apagar(Id);
-            return RedirectToAction("Index");
+                bool apagado = _contatoRepositorio.Apagar(Id);
+                if (apagado)
+                {
+                    TempData["MensagemSucesso"] = "Contato apagado com sucesso";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Ops, não conseguimos apagar seu contato";
+
+                }
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos apagar seu contato, detalhe do erro:{error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
-        public IActionResult Alterar (ContatoModel contato)
+        public IActionResult Alterar(ContatoModel contato)
         {
+            try
+            {
 
-            _contatoRepositorio.Atualizar(contato);
-            return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Atualizar(contato);
+                    TempData["MensagemSucesso"] = "Contato alterado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View("Editar", contato);
+            }
+            catch (Exception erro)
+            {
+
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu contato, tente novamente, detalhe do erro:{erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model LoginModel
+@{
+    Layout = "_LayoutDeslogado";
+    ViewData["Title"] = "Login";
+}
+
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" aria-label="close"> X</button>
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Acesso</h1>
+</div>
+
+<div class="card p-4 m-lg-auto" style="width: 18rem;">
+  @*<img class="card-img-top" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.dreamstime.com%2Filustra%25C3%25A7%25C3%25A3o-stock-polegar-do-ser-humano-da-impress%25C3%25A3o-digital-image81132312&psig=AOvVaw0QB-4JEDhdzR0Vwk9vzc_x&ust=1653057441185000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCODfl_bk6_cCFQAAAAAdAAAAABAO">*@
+  <form asp-controller="Login" asp-action="Entrar" method="post">
+    <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input asp-for="Login" type="text" class="form-control" id="login">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input asp-for="Senha" type="password" class="form-control" id="senha">
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Entrar</button>
+</form>
+
+</div>

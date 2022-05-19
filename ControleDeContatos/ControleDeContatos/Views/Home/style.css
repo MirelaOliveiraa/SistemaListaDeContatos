@@ -1,0 +1,12 @@
+﻿namespace ControleDeContatos.Views.Home {
+}
+
+.card-login {
+    margin: 0 auto;
+}
+
+.pb-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

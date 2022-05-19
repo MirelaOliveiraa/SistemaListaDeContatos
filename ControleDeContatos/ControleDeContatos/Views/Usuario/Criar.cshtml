@@ -1,0 +1,58 @@
+﻿@using ControleDeContatos.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Criar Usuário";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar usuário</h1>
+
+</div>
+<form asp-controller="Usuario" asp-action="Criar" method="post">
+
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o email do usuário">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <br />
+
+    <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do usuário">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <br />
+    
+    <div class="form-group">
+        <label for="perfil">Perfil</label>
+        <select asp-for="Perfil" class="form-control" >
+            <option value=""> Selecione</option>
+            <option value="@PerfilEnum.Admin" >Administrador</option>
+            <option value="@PerfilEnum.Padrao" >Padrão</option>
+        </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
+    </div>
+    <br />
+
+    
+    <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" placeholder="Digite a senha do usuário">
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary ">Adicionar</button>
+    <a class="btn-secondary btn" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>
